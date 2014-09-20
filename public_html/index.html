@@ -6,13 +6,13 @@
       <div class="jumbotron">
           <h1>Bloombuzz</h1>
           <form action="service.php">
-              Service API key: <input type="text" mame="skey">
-              <input type="submit" value="Access">
+              Pagerduty Service API key: <input type="text" class="skey">
+              <button type="button" class="btn btn-default sbutton">Access</button>
       </div>
 </body>
 <script>
-    $(document).ready(function() {
-       $('#createsession').attr("href","session.php?s="+makeid());
+    $('.sbutton').click(function() {
+        window.location.href = "service.php?s="+$(".skey").val();
     });
 
 </script>
