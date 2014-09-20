@@ -121,6 +121,7 @@
                     '<h4 class="panel-title pull-left">' +
                     ticker + ' ' + type + ' ' + price.toFixed(2) + '</h4>'+
                     '<div class="btn-group pull-right">'+
+                        '<a class="btn btn-default ack">Acknowledge</a>'+
                         '<a class="btn btn-default resolved">Resolved</a>'+
                         '<a class="btn btn-default delete">Delete</a>'+
                     '</div>'+
@@ -134,6 +135,7 @@
                     '<h4 class="panel-title pull-left">' +
                     ticker + ' ' + type + ' ' + price.toFixed(2) + '</h4>'+
                     '<div class="btn-group pull-right">'+
+                        '<a class="btn btn-default ack">Acknowledge</a>'+
                         '<a class="btn btn-default resolved">Resolved</a>'+
                         '<a class="btn btn-default delete">Delete</a>'+
                     '</div>'+
@@ -148,6 +150,7 @@
                     '<h4 class="panel-title pull-left">' +
                     ticker + ' ' + type + ' ' + price.toFixed(2) + '</h4>'+
                     '<div class="btn-group pull-right">'+
+                        '<a class="btn btn-default ack">Acknowledge</a>'+
                         '<a class="btn btn-default resolved">Resolved</a>'+
                         '<a class="btn btn-default delete">Delete</a>'+
                     '</div>'+
@@ -155,22 +158,40 @@
             '</div>')
         }
         $(".resolved").click(function() {
-            /*
             var panel = $(this).parent().parent().parent();
             var myId = panel.attr("id");
-            */
-            /*
-            var index - myId.indexOf('-')
+            var index = myId.indexOf('-');
             if (index == -1) {
-                panel.removeClass('panel-danger').addClass('panel-primary')
+                panel.removeClass('panel-danger').addClass('panel-info')
             }
             else {
-                panel.removeClass('panel-danger').addClass('panel-info')
-            }*/
+                panel.removeClass('panel-danger').addClass('panel-primary')
+            }
+            s.send("res," + key + "," +myId);
         });
         $(".delete").click(function() {
             // get ticker type price
-            $(this).parent().parent().parent().remove();
+            var panel = $(this).parent().parent().parent();
+            var myId = panel.attr("id");
+            panel.remove();
+            s.send("del," + key +"," + myId);
+        });
+        $(".ack").click(function() {
+            // get ticker type price
+            var panel = $(this).parent().parent().parent();
+            var myId = panel.attr("id");
+            var index = myId.indexOf('-');
+            if (index == -1) {
+                panel.removeClass('panel-danger').addClass('panel-warning')
+            }
+            else {
+                panel.removeClass('panel-danger').addClass('panel-warning')
+            var panel = $(this).parent().parent().parent();
+
+            var myId = panel.attr("id");
+            panel.remove();
+            }
+            s.send("ack," + key +"," + myId);
         });
     }
 
